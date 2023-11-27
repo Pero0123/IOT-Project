@@ -1,3 +1,5 @@
+#include <Servo.h>
+
 //pins for front ultrasonic
 #define frontTrig 33
 #define frontEcho 34
@@ -6,6 +8,8 @@
 #define sideTrig 25
 #define sideEcho 26
 
+//pins for servo
+#define continuesServo 27
 
 //motor pins
 #define RightMotorEnable 20
