@@ -1,4 +1,4 @@
-#include <Servo.h>
+#include <ESP32Servo360.h>
 
 //pins for front ultrasonic
 #define frontTrig 33
