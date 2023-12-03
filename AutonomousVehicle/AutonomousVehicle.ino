@@ -42,20 +42,33 @@ void setup() {
   Servo1.attach(continuesServo);
 }
 void loop() {
- /*
+
+
+
+  turnWithReverse(0, -200);
+  delay(10);
+
+
+
+
+  /*
   getDistance(0);
   getDistance(1);
-  forwards(100);
+  forwards(130);
   delay(1000);
-  reverse(100);
+  reverse(130);
   delay(1000);
   stop();
+  delay(1000);
+  Turn(255,0);
+  delay(1000);
+  Turn(0,255);
   delay(1000);
   */
   //Servo1.write(90);
   //delay(1000);
-  Servo1.write(92);
-  delay(1000);
+  //Servo1.write(92);
+  //delay(1000);
  // Servo1.write(0);
  // delay(1000);
  
