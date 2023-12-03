@@ -71,16 +71,35 @@ void setup() {
   Servo1.attach(continuesServo);
 }
 void loop() {
+  
+  char message;
   //reads and sends information between bluetooth app and serial console
-  if (Serial.available()) {
-    SerialBT.write(Serial.read());
-  }
   if (SerialBT.available()) {
-    Serial.write(SerialBT.read());
+    message=SerialBT.read();
+    Serial.write(message);
   }
-  delay(100);
+  switch(message)
+  {
+      case 'w':
+      forwards(200);//go forwards
+    break;
 
+        case 's':
+        reverse(200);//reverse obvisoulsy
+    break;
 
+        case 'a':
+        turnWithReverse(-150, 150);//turn left
+    break;
 
+        case 'd':
+        turnWithReverse(150, -150);//turn right
+    break;
+
+        case 'g':
+        forwards(1);//stop. actual stop function needs to be fixed
+    break;
+  }
+  delay(40);
 
 }

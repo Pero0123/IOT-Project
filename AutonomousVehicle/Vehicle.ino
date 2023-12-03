@@ -73,7 +73,7 @@ void Turn(int speedLeft ,int speedRight)
 
 void stop()
 {
-  digitalWrite(RightMotorEnable,LOW);//motor off
-  digitalWrite(LeftMotorEnable,LOW);//motor off 
+  digitalWrite(RightMotorEnable,HIGH);//motor off
+  digitalWrite(LeftMotorEnable,HIGH);//motor off 
 }
 
