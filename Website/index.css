@@ -1,0 +1,31 @@
+*{
+    background-color: rgba(11, 106, 190, 0.564);
+}
+
+#navbar
+{
+    height: 15%;
+    width: 90%;
+    color: blueviolet;
+    
+}
+
+a:link {
+    text-decoration: none;
+    color: rgb(147, 7, 152)250);
+  }
+  
+  a:visited {
+    text-decoration: none;
+    color: rgb(147, 7, 152)250);
+  }
+  
+  a:hover {
+    text-decoration: underline;
+    color: rgb(147, 7, 152)250);
+  }
+
+#navbar{
+    color: chocolate;
+    
+}
