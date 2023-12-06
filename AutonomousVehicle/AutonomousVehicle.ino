@@ -53,7 +53,9 @@ void setup() {
   Servo1.attach(continuesServo);
 }
 void loop() {
-  bluetoothControlRead();//code for bluetooth control
-  vehicleHeading = getCompassHeading();//reads heading from compass
-  delay(40);
+  //bluetoothControlRead();//code for bluetooth control
+  //vehicleHeading = getCompassHeading();//reads heading from compass
+  //correctPlatformHeading();
+  //Servo1.write(90);
+  delay(2);
 }
