@@ -36,7 +36,7 @@ QMC5883L compass;
 void setup() {
   Serial.begin(115200);
   compassSetup();//setup code for compass
-  bluetoothSetup();//setup code for bluetooth
+  //bluetoothSetup();//setup code for bluetooth
 
 //sets pinmodes for all ultrasonic pins
   pinMode(frontTrig, OUTPUT);
@@ -54,8 +54,25 @@ void setup() {
 }
 void loop() {
   //bluetoothControlRead();//code for bluetooth control
-  //vehicleHeading = getCompassHeading();//reads heading from compass
+  vehicleHeading = getCompassHeading();//reads heading from compass
   //correctPlatformHeading();
   //Servo1.write(90);
-  delay(2);
+
+    if (vehicleHeading<100&&vehicleHeading>80) 
+  {
+     turnWithReverse(150, 150);
+     Serial.print("platform is aligned to 90");
+  }
+  else if (vehicleHeading>90)
+  {
+  turnWithReverse(0,150);
+  Serial.print("roating counterclockwise");
+  }
+   else if (vehicleHeading<90)
+  {
+  turnWithReverse(150,0);
+  Serial.print("platform heading is greater than 90");
+  }
+
+  delay(10);
 }
