@@ -28,6 +28,8 @@ float distanceFront, distanceSide;
 int coords[2];//stores co-ordinates of the vehicle
 int vehicleHeading;//stores vehicle heading from compass1
 int trackerHeading;//stores ultrasonic heading from compass2
+int targetHeading = 5;//the heading the vehicle should drive towards
+int maxHeading, minHeading;
 
 Servo Servo1;
 BluetoothSerial SerialBT;
@@ -36,7 +38,7 @@ QMC5883L compass;
 void setup() {
   Serial.begin(115200);
   compassSetup();//setup code for compass
-  //bluetoothSetup();//setup code for bluetooth
+  bluetoothSetup();//setup code for bluetooth
 
 //sets pinmodes for all ultrasonic pins
   pinMode(frontTrig, OUTPUT);
@@ -57,22 +59,40 @@ void loop() {
   vehicleHeading = getCompassHeading();//reads heading from compass
   //correctPlatformHeading();
   //Servo1.write(90);
+  bluetoothHeadingControl();
 
-    if (vehicleHeading<100&&vehicleHeading>80) 
+  //sets min and max heading
+  //takes into account that heading is continues from 0-360
+  if((targetHeading-10)<0)
   {
-     turnWithReverse(150, 150);
-     Serial.print("platform is aligned to 90");
+    maxHeading=(targetHeading-10)+360;
+    minHeading=targetHeading+10;
   }
-  else if (vehicleHeading>90)
+  else if((targetHeading+10)>360)
   {
-  turnWithReverse(0,150);
-  Serial.print("roating counterclockwise");
+    minHeading=(targetHeading+10)-360;
+    maxHeading=targetHeading-10;
   }
-   else if (vehicleHeading<90)
+  else
   {
-  turnWithReverse(150,0);
-  Serial.print("platform heading is greater than 90");
+    minHeading=targetHeading-10;
+    maxHeading=targetHeading+10;
   }
 
-  delay(10);
+
+
+  if (vehicleHeading<maxHeading && vehicleHeading>minHeading)
+  {
+     turnWithReverse(190, 180);
+  }
+  else if (vehicleHeading>targetHeading)
+  {
+  turnWithReverse(-150,150);
+  }
+   else if (vehicleHeading<targetHeading)
+  {
+  turnWithReverse(150,-150);
+  }
+
+  delay(5);
 }

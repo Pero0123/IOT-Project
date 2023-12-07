@@ -27,16 +27,15 @@ void bluetoothControlRead()
   //reads and sends information between bluetooth app and serial console
   if (SerialBT.available()) {
     message=SerialBT.read();
-    Serial.write(message);
   }
   switch(message)
   {
       case 'w':
-      forwards(200);//go forwards
+      turnWithReverse(200, 200);//go forwards
     break;
 
         case 's':
-        reverse(200);//reverse obvisoulsy
+        turnWithReverse(200, 200);//reverse obvisoulsy
     break;
 
         case 'a':
@@ -45,6 +44,37 @@ void bluetoothControlRead()
 
         case 'd':
         turnWithReverse(150, -150);//turn right
+    break;
+
+        case 'g':
+        forwards(1);//stop. actual stop function needs to be fixed
+    break;
+  }
+}
+
+void bluetoothHeadingControl()
+{
+    char message;
+  //reads and sends information between bluetooth app and serial console
+  if (SerialBT.available()) {
+    message=SerialBT.read();
+  }
+  switch(message)
+  {
+      case 'w':
+      targetHeading=0;
+    break;
+
+        case 's':
+        targetHeading=90;
+    break;
+
+        case 'a':
+        targetHeading=180;
+    break;
+
+        case 'd':
+        targetHeading=270;
     break;
 
         case 'g':

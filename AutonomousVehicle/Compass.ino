@@ -4,7 +4,7 @@ void compassSetup()
   Wire.begin();
 
 	compass.init();
-	compass.setSamplingRate(50);
+	compass.setSamplingRate(100);
 
 	Serial.begin(115200);
 	Serial.println("QMC5883L Compass Demo");
