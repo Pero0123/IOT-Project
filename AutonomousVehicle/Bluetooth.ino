@@ -47,7 +47,7 @@ void bluetoothControlRead()
     break;
 
         case 'g':
-        forwards(1);//stop. actual stop function needs to be fixed
+        turnWithReverse(1,1);//stop. actual stop function needs to be fixed
     break;
   }
 }
@@ -78,7 +78,14 @@ void bluetoothHeadingControl()
     break;
 
         case 'g':
-        forwards(1);//stop. actual stop function needs to be fixed
+        turnWithReverse(1,1);//stop. actual stop function needs to be fixed
     break;
   }
+}
+
+void printCoordsToBluetooth()
+{
+ char temp[150];
+ sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading);
+ SerialBT.println(temp);
 }

@@ -2,30 +2,6 @@
 //functions may not work correcly if called more than once every ~10ms
 
 
-//drive forwards at set speed
-void forwards(int speed)
-{
-  //set direction of motors
-  digitalWrite(RightMotorDir,LOW);
-  digitalWrite(LeftMotorDir,HIGH);
-
-  //sets speed of each motor
-  analogWrite(RightMotorEnable,speed);
-  analogWrite(LeftMotorEnable,speed);
-}
-
-//reverse at set speed
-void reverse(int speed)
-{
-  //sets direction of both motors
-  digitalWrite(RightMotorDir,HIGH);
-  digitalWrite(LeftMotorDir,LOW);
-
-  //sets speed of the motors
-  analogWrite(RightMotorEnable,speed);
-  analogWrite(LeftMotorEnable,speed);
-}
-
 //function to turn. speedLeft and speedRight controlled the speed of each wheel
 //if speed is set to negative motor will reverse at the absolute value set
 //can also be used for driving forwars and reversing with more control than forwards() and reverse()
@@ -59,21 +35,48 @@ void turnWithReverse(int speedLeft ,int speedRight)
   analogWrite(LeftMotorEnable,speedLeft);
 }
 
-
-// simpleafunction to turn. speedLeft and speedRight controlled the speed of each wheel
-//does not support reversing a motor. use turnWithReverse() instead
-void Turn(int speedLeft ,int speedRight)
-{
-  analogWrite(RightMotorEnable,speedRight);
-  analogWrite(LeftMotorEnable,speedLeft);
-
-  digitalWrite(RightMotorDir,LOW);//motor off
-  digitalWrite(LeftMotorDir,LOW);//motor on 
-}
-
 void stop()
 {
   digitalWrite(RightMotorEnable,HIGH);//motor off
   digitalWrite(LeftMotorEnable,HIGH);//motor off 
+}
+
+//drives vehicle toward passed heading
+void driveTowardHeading(int vehicleHeading, int maxHeading, int minHeading)
+{
+  if (vehicleHeading<maxHeading && vehicleHeading>minHeading)
+  {
+     turnWithReverse(190, 190);
+  }
+  else if (vehicleHeading>targetHeading)
+  {
+  turnWithReverse(-160,160);
+  }
+   else if (vehicleHeading<targetHeading)
+  {
+  turnWithReverse(160,-160);
+  }
+}
+
+
+//sets min and max heading
+//takes into account that heading is continues from 0-360
+void configureVehicleHeading()
+{
+   if((targetHeading-headingRange)<0)
+  {
+    maxHeading=(targetHeading-headingRange)+360;
+    minHeading=targetHeading+headingRange;
+  }
+  else if((targetHeading+headingRange)>360)
+  {
+    minHeading=(targetHeading+headingRange)-360;
+    maxHeading=targetHeading-headingRange;
+  }
+  else
+  {
+    minHeading=targetHeading-headingRange;
+    maxHeading=targetHeading+headingRange;
+  }
 }
 
