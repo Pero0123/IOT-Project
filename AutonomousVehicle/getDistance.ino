@@ -1,6 +1,24 @@
 //funtion to get distance from a specified ultrasonic sensor
 //0 for front, 1 for side sensor
 //temporary solution to selecting the sensor to read from
+
+
+//ultrasonic setup code
+void ultrasonicSetup()
+{
+  //sets pinmodes for all ultrasonic pins
+  pinMode(frontTrig, OUTPUT);
+  pinMode(sideTrig, OUTPUT);
+  pinMode(frontEcho, INPUT);
+  pinMode(sideEcho, INPUT);
+//pinmodes for hbrdige motor controller
+  pinMode(LeftMotorEnable, OUTPUT);
+  pinMode(RightMotorEnable, OUTPUT);
+  pinMode(RightMotorDir, OUTPUT);
+  pinMode(LeftMotorDir, OUTPUT);
+
+}
+
 float getDistance(int sensor)
 {
   float duration;
@@ -13,13 +31,9 @@ float getDistance(int sensor)
   digitalWrite(frontTrig, LOW);
 
   duration = pulseIn(frontEcho, HIGH);
-  distanceFront = (duration * 003.514);
+  distanceFront = (duration * 0.034 / 2);
+  
   return distanceFront;
-
-  // Prints the distance on the Serial Monitor
-  Serial.print("Distance Front: ");
-  Serial.println(distanceFront);
-  delay(100);
   }
   else{//reads from side sensor
   digitalWrite(sideTrig, LOW);
@@ -29,13 +43,9 @@ float getDistance(int sensor)
   digitalWrite(sideTrig, LOW);
 
   duration = pulseIn(sideEcho, HIGH);
-  distanceSide = (duration * 003.514);
+  distanceSide = (duration * 0.034 / 2);
+  
   return distanceSide;
-
-  // Prints the distance on the Serial Monitor
-  Serial.print("Distance side: ");
-  Serial.println(distanceSide);
-  delay(100);
   }
 }
 
@@ -43,7 +53,7 @@ float getDistance(int sensor)
   //uses getDistan
   void getCoords()
   {
-    coords[0] = getDistance(1)+ UltrasonicOffsetSide;//x coordinates. the ultrasonicOffeset is the physical offset of the sensor
+    coords[0] = getDistance(1);//x coordinates. the ultrasonicOffeset is the physical offset of the sensor
     delay(100);//delay ensures that the ultrasonics don't interfere with each other. may need to be adjusted
-    coords[1] = getDistance(0)+ UltrasonicOffsetSide;//y coordinates. the ultrasonicOffset is the physical offset of the sensor
+    coords[1] = getDistance(0);//y coordinates. the ultrasonicOffset is the physical offset of the sensor
   }

@@ -27,16 +27,15 @@ void bluetoothControlRead()
   //reads and sends information between bluetooth app and serial console
   if (SerialBT.available()) {
     message=SerialBT.read();
-    Serial.write(message);
   }
   switch(message)
   {
       case 'w':
-      forwards(200);//go forwards
+      turnWithReverse(200, 200);//go forwards
     break;
 
         case 's':
-        reverse(200);//reverse obvisoulsy
+        turnWithReverse(200, 200);//reverse obvisoulsy
     break;
 
         case 'a':
@@ -48,7 +47,45 @@ void bluetoothControlRead()
     break;
 
         case 'g':
-        forwards(1);//stop. actual stop function needs to be fixed
+        turnWithReverse(1,1);//stop. actual stop function needs to be fixed
     break;
   }
+}
+
+void bluetoothHeadingControl()
+{
+    char message;
+  //reads and sends information between bluetooth app and serial console
+  if (SerialBT.available()) {
+    message=SerialBT.read();
+  }
+  switch(message)
+  {
+      case 'w':
+      targetHeading=0;
+    break;
+
+        case 's':
+        targetHeading=90;
+    break;
+
+        case 'a':
+        targetHeading=180;
+    break;
+
+        case 'd':
+        targetHeading=270;
+    break;
+
+        case 'g':
+        turnWithReverse(1,1);//stop. actual stop function needs to be fixed
+    break;
+  }
+}
+
+void printCoordsToBluetooth()
+{
+ char temp[150];
+ sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading);
+ SerialBT.println(temp);
 }
