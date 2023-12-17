@@ -31,23 +31,23 @@ void bluetoothControlRead()
   switch(message)
   {
       case 'w':
-      turnWithReverse(200, 200);//go forwards
+      drive(200, 200);//go forwards
     break;
 
         case 's':
-        turnWithReverse(200, 200);//reverse obvisoulsy
+        drive(200, 200);//reverse obvisoulsy
     break;
 
         case 'a':
-        turnWithReverse(-150, 150);//turn left
+        drive(-150, 150);//turn left
     break;
 
         case 'd':
-        turnWithReverse(150, -150);//turn right
+        drive(150, -150);//turn right
     break;
 
         case 'g':
-        turnWithReverse(1,1);//stop. actual stop function needs to be fixed
+        drive(1,1);//stop. actual stop function needs to be fixed
     break;
   }
 }
@@ -78,14 +78,14 @@ void bluetoothHeadingControl()
     break;
 
         case 'g':
-        turnWithReverse(1,1);//stop. actual stop function needs to be fixed
+        drive(1,1);//stop. actual stop function needs to be fixed
     break;
   }
 }
 
 void printCoordsToBluetooth()
 {
- char temp[150];
- sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading);
+ char temp[170];
+ sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\nMax Heading: %d\nMin Heading: %d\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading,maxPlatformHeading,minPlatformHeading);
  SerialBT.println(temp);
 }
