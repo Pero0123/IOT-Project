@@ -34,19 +34,12 @@ int targetHeading = 140;//the heading the vehicle should drive towards
 int maxHeading, minHeading;
 int headingRange = 12;
 
+int targetPlatformHeading = 80;//the heading the ultrasonic platform should point towards
+int maxPlatformHeading, minPlatformHeading;
+int headingRangePlatform = 4;
+
 //bmm150 compass definitions
 DFRobot_BMM150_I2C bmm150(&Wire, I2C_ADDRESS_4);
-
-/*can probalby delete all this but ill have to test it so im not bothered to do it now
-//When using SPI communication, use the following program to construct an object by DFRobot_BMM150_SPI
-#if defined(ESP32) || defined(ESP8266)
-  #define BMM150_CS D3
-#elif defined(__AVR__) || defined(ARDUINO_SAM_ZERO)
-  #define BMM150_CS 3
-#elif (defined NRF5)
-  #define BMM150_CS 2  //The corresponding silkscreen on the development board is the pin P2
-#endif
-*/
 
 //creates objects for sensors
 Servo Servo1;
@@ -58,16 +51,15 @@ void setup() {
   bluetoothSetup();//setup code for bluetooth
   ultrasonicSetup();//setup code for the ultrasonic sensor on the tracking platform
   Servo1.attach(continuesServo);//create servo object for continues servo
-  //compassSetup();
+  compassSetup();
   //bmm155Setup();//setup code for the bmm150 compass module
 }
 
 void loop() {
- // bluetoothControlRead();//code for bluetooth control
-  //platformHeading = getCompassHeading();//reads heading from compass
-  //correctPlatformHeading();
-  //vehicleHeading = bmm150.getCompassDegree();
-  //getCoords();
+  //bluetoothControlRead();//code for bluetooth control
+  platformHeading = getCompassHeading();
+  //platformHeading = bmm150.getCompassDegree();
+  correctPlatformHeading();
   printCoordsToBluetooth();
-  delay(100);
+  //delay(100);
 }

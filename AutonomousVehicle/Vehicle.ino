@@ -5,7 +5,7 @@
 //function to turn. speedLeft and speedRight controlled the speed of each wheel
 //if speed is set to negative motor will reverse at the absolute value set
 //can also be used for driving forwars and reversing with more control than forwards() and reverse()
-void turnWithReverse(int speedLeft ,int speedRight)
+void drive(int speedLeft ,int speedRight)
 {
 
   //checks if speed is negative or postive
@@ -46,15 +46,15 @@ void driveTowardHeading(int vehicleHeading, int maxHeading, int minHeading)
 {
   if (vehicleHeading<maxHeading && vehicleHeading>minHeading)
   {
-     turnWithReverse(190, 190);
+     drive(190, 190);
   }
   else if (vehicleHeading>targetHeading)
   {
-  turnWithReverse(-160,160);
+  drive(-160,160);
   }
    else if (vehicleHeading<targetHeading)
   {
-  turnWithReverse(160,-160);
+  drive(160,-160);
   }
 }
 
