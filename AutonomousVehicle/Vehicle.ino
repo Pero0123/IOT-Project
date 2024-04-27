@@ -30,7 +30,7 @@ void drive(int speedLeft ,int speedRight)
     speedRight = speedRight*(-1);    
   }
 
-  //sets the speed of both motors to the respevtive speed variable
+  //sets the speed of both motors to the respective speed variable
   analogWrite(RightMotorEnable,speedRight);
   analogWrite(LeftMotorEnable,speedLeft);
 }

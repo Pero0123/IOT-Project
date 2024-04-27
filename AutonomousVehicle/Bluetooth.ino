@@ -89,10 +89,10 @@ void bluetoothHeadingControl()
 
   
 
-void printCoordsToBluetooth()
-{
- char temp[170];
- sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\nMax Heading: %d\nMin Heading: %d\n%c\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading,maxHeading,minHeading,BTmessage);
- SerialBT.println(temp);
- Serial.println(temp);
-}
+// void printCoordsToBluetooth()
+// {
+//  char temp[170];
+//  sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\nMax Heading: %d\nMin Heading: %d\n%c\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading,maxHeading,minHeading,BTmessage);
+//  SerialBT.println(temp);
+//  Serial.println(temp);
+// }
