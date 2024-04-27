@@ -54,6 +54,6 @@ float getDistance(int sensor)
   void getCoords()
   {
     coords[0] = getDistance(1);//x coordinates. the ultrasonicOffeset is the physical offset of the sensor
-    delay(100);//delay ensures that the ultrasonics don't interfere with each other. may need to be adjusted
+    delay(20);//delay ensures that the ultrasonics don't interfere with each other. may need to be adjusted
     coords[1] = getDistance(0);//y coordinates. the ultrasonicOffset is the physical offset of the sensor
   }

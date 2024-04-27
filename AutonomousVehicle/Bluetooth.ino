@@ -28,6 +28,7 @@ void bluetoothControlRead()
   if (SerialBT.available()) {
     message=SerialBT.read();
   }
+
   switch(message)
   {
       case 'w':
@@ -35,7 +36,7 @@ void bluetoothControlRead()
     break;
 
         case 's':
-        drive(200, 200);//reverse obvisoulsy
+        drive(-200, -200);//reverse obvisoulsy
     break;
 
         case 'a':
@@ -47,7 +48,7 @@ void bluetoothControlRead()
     break;
 
         case 'g':
-        drive(1,1);//stop. actual stop function needs to be fixed
+        drive(1,1);//stop.
     break;
   }
 }
@@ -59,33 +60,39 @@ void bluetoothHeadingControl()
   if (SerialBT.available()) {
     message=SerialBT.read();
   }
+
   switch(message)
   {
       case 'w':
-      targetHeading=0;
+      targetHeading = 0;
     break;
 
         case 's':
-        targetHeading=90;
+        targetHeading = 90;
     break;
 
         case 'a':
-        targetHeading=180;
+        targetHeading = 180;
     break;
 
         case 'd':
-        targetHeading=270;
+        targetHeading = 270;
     break;
 
         case 'g':
-        drive(1,1);//stop. actual stop function needs to be fixed
+        drive(1,1);//stop.
     break;
   }
+  configureVehicleHeading();
+  driveTowardHeading();
 }
+
+  
 
 void printCoordsToBluetooth()
 {
  char temp[170];
- sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\nMax Heading: %d\nMin Heading: %d\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading,maxPlatformHeading,minPlatformHeading);
+ sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\nMax Heading: %d\nMin Heading: %d\n%c\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading,maxHeading,minHeading,BTmessage);
  SerialBT.println(temp);
+ Serial.println(temp);
 }

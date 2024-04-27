@@ -42,17 +42,17 @@ void stop()
 }
 
 //drives vehicle toward passed heading
-void driveTowardHeading(int vehicleHeading, int maxHeading, int minHeading)
+void driveTowardHeading()
 {
   if (vehicleHeading<maxHeading && vehicleHeading>minHeading)
   {
-     drive(190, 190);
+     drive(140, 200);
   }
-  else if (vehicleHeading>targetHeading)
+  else if (vehicleHeading>maxHeading)
   {
   drive(-160,160);
   }
-   else if (vehicleHeading<targetHeading)
+   else if (vehicleHeading<minHeading)
   {
   drive(160,-160);
   }
