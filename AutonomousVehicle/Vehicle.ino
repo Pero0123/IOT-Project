@@ -46,21 +46,21 @@ void driveTowardHeading()
 {
   if (vehicleHeading<maxHeading && vehicleHeading>minHeading)
   {
-     drive(140, 200);
+     drive(100, 110);//facing the correct heading. should drive straight
   }
   else if (vehicleHeading>maxHeading)
   {
-  drive(-160,160);
+  drive(-90,90);//facing to the right. steer left
   }
    else if (vehicleHeading<minHeading)
   {
-  drive(160,-160);
+  drive(90,-90);//facing to the left. steer right
   }
 }
 
 
 //sets min and max heading
-//takes into account that heading is continues from 0-360
+//takes into account that heading is continues from 0-360. gets kinda weird but it works
 void configureVehicleHeading()
 {
    if((targetHeading-headingRange)<0)
