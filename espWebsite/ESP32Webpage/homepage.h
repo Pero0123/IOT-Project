@@ -72,7 +72,7 @@ String homePagePart2 = F(R"=====(</td>
 </html>)=====");
 
 String homePagePart3 = F(R"=====(
- <html lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -163,6 +163,22 @@ h2{
   #Dashboard {   
     flex-direction: column;
   }
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    font-size: 15px;
+  }
+  th{
+  font-size: 10px;
+}
+p{
+  font-size: 10px;
+}
+
+}
+
+@media screen and (max-width: 1000px) {
   h1{
     font-size: 30px;
   }
