@@ -3,7 +3,7 @@
 // If you have 1 reading then you probably have 2 literal strings
 // If you have 2 readings then you probably have 3 literal strings etc.
 
-String homePagePart3 = F(R"=====(
+String homePagePart1 = F(R"=====(
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +51,7 @@ String homePagePart3 = F(R"=====(
       margin-top: 50px;
       margin-bottom: 70px;
     }
+
     .button{
         width: 20%;
     }
@@ -119,22 +120,43 @@ String homePagePart3 = F(R"=====(
 <div id="Dashboard">
   <div id="Telemetry">
     <table>
-      <tr><th>Heading:</th><td>50</td></tr>
-      <tr><th>Temperature:</th><td>22 Celsius</td></tr>
-      <tr><th>Humidity:</th><td>10%</td></tr>
-      <tr><th>Mode:</th><td>Autonomous</td></tr>
+      <tr><th>Heading:</th><td>
+)=====");
+String homePagePart2 = F(R"=====(
+</td></tr>
+      <tr><th>Temperature:</th><td>
+)=====");
+String homePagePart3 = F(R"=====(
+ Celsius</td></tr>
+      <tr><th>Humidity:</th><td>
+)=====");
+String homePagePart4 = F(R"=====(
+</td></tr>
+      <tr><th>Mode:</th><td>
+)=====");
+String homePagePart5 = F(R"=====(
+</td></tr>
     </table>
   </div>
   <div id="CarView">
     <div class="collision_row">
-      <div class="collision_object"></div>
-      <div class="collision_object"></div>
-      <div class="collision_object"></div>
+      <div class="collision_object" style="background-color:
+)=====");
+String homePagePart6 = F(R"=====(
+;"></div>
+      <div class="collision_object" style="background-color:
+)=====");
+String homePagePart7 = F(R"=====(
+;"></div>
+      <div class="collision_object" style="background-color:
+)=====");
+String homePagePart8 = F(R"=====(
+;"></div>
     </div>
     <img src="https://freesvg.org/img/car_topview.png" alt="Vehicle" style="width: 80%;">
   </div>
   <div id="Controls">
-    <h2>Set Heading/Steering</h2>
+    <h2>Set Heading</h2>
     <input type="range" min="1" max="360" value="90" class="slider" id="headingSlider" oninput="updateHeading(this.value);">
     <h2 id="headingValue">90</h2>
     <h2>Manual Control</h2>

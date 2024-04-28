@@ -58,7 +58,16 @@ void handleSlider(){
   server.send(200);
 }
 void handleRoot() {
-  String message = homePagePart3;
+  String message = 
+  homePagePart1 +
+  homePagePart2 +
+  homePagePart3 +
+  homePagePart4 +
+  homePagePart5 +
+  homePagePart6 +
+  homePagePart7 +
+  homePagePart8
+  ;
   server.send(200, "text/html", message);
 }
 
