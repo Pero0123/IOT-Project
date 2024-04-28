@@ -1,0 +1,175 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Vehicle</title>
+</head>
+<body>
+
+  <style>
+*{
+    background-color: rgb(4, 75, 138);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    margin: 5px
+}
+
+p{
+  background-color: transparent;
+  font-size: 20px;
+}
+th{
+  text-align: left;
+  font-size: 20px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+h1{
+  height: 15%;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  font-size: 60px;
+}
+
+h2{
+  width: 100%;
+  color: rgb(255, 145, 0);
+  font-size: 25px;
+  padding-bottom: 60px;
+}
+
+#Dashboard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#Telemetry{
+ width: 20%;
+}
+
+#CarView{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+}
+
+#Controls{
+  width: 20%;
+}
+
+.collision_object{
+  width: 20%;
+  padding: 2%;
+  min-height: 10px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-top: 20px;
+  margin-left: 7%;
+}
+
+.pageLink{
+  background-color: orange;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 700px) {
+  #Dashboard {   
+    flex-direction: column;
+  }
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    font-size: 15px;
+  }
+  th{
+  font-size: 10px;
+}
+p{
+  font-size: 10px;
+}
+
+}
+
+@media screen and (max-width: 1000px) {
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    font-size: 15px;
+  }
+  th{
+  font-size: 10px;
+}
+p{
+  font-size: 10px;
+}
+
+}
+
+  </style>
+
+
+<!-- Title -->
+<div class = "flex-container" style="flex-direction: column;">
+<h1>Autonomous Vehicle</h1>
+<h2>Welcome to the Autonomous Vehicle Dashboard</h2>
+</div> 
+
+<!-- Main content -->
+<div id = "Dashboard">
+  <div id="Telemetry" style="text-align: left;">
+    <table>
+      <tr>
+        <th>Heading:</th><th>50</th>
+      </tr>
+      <tr>
+        <th>Tempreture:</th><th>22 Celsius</th>
+      </tr>
+      <tr>
+        <th>Humidity:</th><th>10%</th>
+      </tr>
+      <tr>
+        <th>Mode:</th><th>Autonomous</th>
+      </tr>
+    </table>
+  </div>
+  <div id="CarView">
+    <div class="flex-container">
+    <div class="collision_object" style="background-color: red;"></div>
+    <div class="collision_object" style="background-color: red;"></div>
+    <div class="collision_object" style="background-color: red;"></div>
+  </div>
+    <img src="https://freesvg.org/img/car_topview.png" alt="Vehicle">
+  </div>
+  <div class = "flex-container" id="Controls">
+
+  </div>
+</div> 
+
+<!-- Other page links -->
+<div class = "footer">
+  <div class="pageLink"><p>About</p></div>
+  <div class="pageLink"><p>Poster</p></div>
+  <div class="pageLink"><p>Contact</p></div>
+  <div class="pageLink"><p>Gallery</p></div>
+</div> 
+
+
+
+
+</body>
+</html>

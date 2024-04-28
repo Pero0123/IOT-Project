@@ -14,7 +14,7 @@
 #define LeftMotorDir 32
 
 
-int vehicleHeading = 999;//stores vehicle heading from compass
+int vehicleHeading = 20;//stores vehicle heading from compass// initiates to 20 just to avoid anything weired happening druing callibration
 int targetHeading = 140;//the heading the vehicle should drive towards
 int maxHeading, minHeading;
 int headingRange = 12;
@@ -40,11 +40,10 @@ void setup() {
 }
 
 void loop() {
- 
-  // //Vehicle driving towards a set heading
-  // vehicleHeading = getHeading();
-  // configureVehicleHeading();
-  // driveTowardHeading();
-  // delay(50);
- 
+targetHeading = 270;
+vehicleHeading = getHeading();
+configureVehicleHeading();//sets up min and max heading before vehcile tries to correct
+driveTowardHeading();//vehicle attempts to face in the specified heading in targetHeading
+delay(10);
+
 }
