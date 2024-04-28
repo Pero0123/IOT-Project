@@ -47,7 +47,16 @@ String humidity = String(DHT.humidity);
 return humidity;
 }
 
-
+void handleKeyPress(){
+  String receivedData = server.arg("button");
+  Serial.println(receivedData);
+  server.send(200);
+}
+void handleSlider(){
+  String receivedHeading = server.arg("value");
+  Serial.println(receivedHeading);
+  server.send(200);
+}
 void handleRoot() {
   String message = homePagePart3;
   server.send(200, "text/html", message);
@@ -92,6 +101,8 @@ void setup(void) {
   }
 
   server.on("/", handleRoot);
+  server.on("/sentKeyPressToWebServer", handleKeyPress);
+  server.on("/sentSliderValueToWebServer", handleSlider);
   server.on("/inline", []() {
     server.send(200, "text/plain", "this works as well");
   });
