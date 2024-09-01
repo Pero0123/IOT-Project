@@ -1,4 +1,4 @@
-#include<Servo.h>
+#include <Servo.h>
 #include <BluetoothSerial.h>
 #include <Wire.h>
 #include <QMC5883L.h>
@@ -12,18 +12,18 @@
 #define RightMotorDir 25
 #define LeftMotorEnable 33
 #define LeftMotorDir 32
+#define headingRange 12
 
 
-int vehicleHeading = 20;//stores vehicle heading from compass// initiates to 20 just to avoid anything weired happening druing callibration
-int targetHeading = 140;//the heading the vehicle should drive towards
-int maxHeading, minHeading;
-int headingRange = 12;
+uint8_t vehicleHeading = 20;//stores vehicle heading from compass// initiates to 20 just to avoid anything weired happening druing callibration
+uint8_t targetHeading = 140;//the heading the vehicle should drive towards
+uint8_t maxHeading, minHeading;
 
 //bluetooth stuff here
 char BTmessage;
 
 //sensor objects
-Servo UltrasonicServo;
+//Servo UltrasonicServo;
 BluetoothSerial SerialBT;
 QMC5883L compass;
 

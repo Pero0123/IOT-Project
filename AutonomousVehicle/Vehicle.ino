@@ -5,7 +5,7 @@
 //function to turn. speedLeft and speedRight controlled the speed of each wheel
 //if speed is set to negative motor will reverse at the absolute value set
 //can also be used for driving forwars and reversing with more control than forwards() and reverse()
-void drive(int speedLeft ,int speedRight)
+void drive(int8_t speedLeft ,int8_t speedRight)
 {
 
   //checks if speed is negative or postive

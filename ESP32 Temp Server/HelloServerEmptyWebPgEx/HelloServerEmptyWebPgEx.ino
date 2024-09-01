@@ -49,7 +49,7 @@ return humidity;
 
 
 void handleRoot() {
-  String message = homePagePart1 + getTemp() + homePagePart2;
+  String message = homePagePart1 + getTemp() + homePagePart2+ homePagePart3+ homePagePart4;
   server.send(200, "text/html", message);
 }
 
