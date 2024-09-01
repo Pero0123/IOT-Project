@@ -20,7 +20,6 @@ String device_name = "PeroS21";//bluetooth name of the esp32
     Serial.println("Using PIN");
   #endif
 }
-
 void bluetoothControlRead()
 {
     char message;
@@ -53,46 +52,5 @@ void bluetoothControlRead()
   }
 }
 
-void bluetoothHeadingControl()
-{
-    char message;
-  //reads and sends information between bluetooth app and serial console
-  if (SerialBT.available()) {
-    message=SerialBT.read();
-  }
-
-  switch(message)
-  {
-      case 'w':
-      targetHeading = 0;
-    break;
-
-        case 's':
-        targetHeading = 90;
-    break;
-
-        case 'a':
-        targetHeading = 180;
-    break;
-
-        case 'd':
-        targetHeading = 270;
-    break;
-
-        case 'g':
-        drive(1,1);//stop.
-    break;
-  }
-  configureVehicleHeading();
-  driveTowardHeading();
-}
 
   
-
-// void printCoordsToBluetooth()
-// {
-//  char temp[170];
-//  sprintf(temp, "Vehicle is at (%.1f,%.1f)\nVehicle Heading: %d\nPlatform Heading: %d\nMax Heading: %d\nMin Heading: %d\n%c\n------------------------------------------------\n\n",coords[0],coords[1],vehicleHeading,platformHeading,maxHeading,minHeading,BTmessage);
-//  SerialBT.println(temp);
-//  Serial.println(temp);
-// }

@@ -8,7 +8,6 @@
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       padding: 0;
@@ -17,7 +16,6 @@
       color: white;
       text-align: center;
     }
-
     h1 {
       font-size: 60px;
     }
@@ -28,20 +26,19 @@
       margin-bottom: 30px;
     }
 
-    #Dashboard {
+    #Dash {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
       padding: 20px;
     }
-
-    #Telemetry, #CarView, #Controls {
-      flex: 1 1 30%; /* Grow to fill space, but do not shrink below 30% of the parent container */
+    #Tel, #Car, #Con {
+      flex: 1 1 30%;
       margin: 10px;
     }
 
     .controlSlider{
-      rotate: 90deg;
+      rotate: 270deg;
       margin-top: 50px;
       margin-bottom: 70px;
     }
@@ -111,8 +108,8 @@
 </div> 
 
 <!-- Main content -->
-<div id="Dashboard">
-  <div id="Telemetry">
+<div id="Dash">
+  <div id="Tel">
     <table>
       <tr><th>Heading:</th><td>50</td></tr>
       <tr><th>Temperature:</th><td>22 Celsius</td></tr>
@@ -120,21 +117,21 @@
       <tr><th>Mode:</th><td>Autonomous</td></tr>
     </table>
   </div>
-  <div id="CarView">
+  <div id="Car">
     <div class="collision_row">
-      <div class="collision_object"></div>
-      <div class="collision_object"></div>
-      <div class="collision_object"></div>
+      <div class="collision_object" style="background-color: green;"></div>
+      <div class="collision_object" style="background-color: green;"></div>
+      <div class="collision_object" style="background-color: green;"></div>
     </div>
     <img src="https://freesvg.org/img/car_topview.png" alt="Vehicle" style="width: 80%;">
   </div>
-  <div id="Controls">
+  <div id="Con">
     <h2>Set Heading</h2>
     <input type="range" min="1" max="360" value="90" class="slider" id="headingSlider" oninput="updateHeading(this.value);">
     <h2 id="headingValue">90</h2>
     <h2>Manual Control</h2>
-    <input type="range" min="-255" max="255" value="0" class="controlSlider" id="speedSlider" oninput="updateSpeedLeft(this.value);">
-    <input type="range" min="-255" max="255" value="0" class="controlSlider" id="speedSlider" oninput="updateSpeedRight(this.value);">
+    <input type="range" min="-255" max="255" value="0" class="controlSlider" oninput="updateSpeedLeft(this.value);">
+    <input type="range" min="-255" max="255" value="0" class="controlSlider" oninput="updateSpeedRight(this.value);">
     <div class="flex-container">
         <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=A')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6YPeSJ6scm5usZK5s6w4Yu6wKKkpyxQ5isDpwAQLuEQ&s" alt=""></button>
         <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=B')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6YPeSJ6scm5usZK5s6w4Yu6wKKkpyxQ5isDpwAQLuEQ&s" alt=""></button>
@@ -156,18 +153,17 @@
 <script>
   function updateHeading(heading) {
     document.getElementById("headingValue").textContent = heading;
-    fetch(`sentHeadingToWebServer?value=${heading}`);
+    fetch(`sentHeadingToWebServer?heading=${heading}`);
   }
 
   function updateSpeedLeft(speedL) {
-    document.getElementById("speedValueL").textContent = speedL;
-    fetch(`sentSpeedLeftToWebServer?value=${speedL}`);
+    fetch(`sentSpeedLeftToWebServer?speedL=${speedL}`);
   }
 
   function updateSpeedRight(speedR) {
-    document.getElementById("speedValueR").textContent = speedR;
-    fetch(`sentSpeedRightToWebServer?value=${speedR}`);
+    fetch(`sentSpeedRightToWebServer?speedR=${speedR}`);
   }
+
 </script>
 
 

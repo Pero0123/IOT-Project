@@ -198,20 +198,12 @@ p{
       <input type="range" min="1" max="360" value="90" class="slider" id="myRange" oninput="fetch('sentKeyPressToWebServer?button=T')">
       <h2><span id="demo"></span></h2>
       <div class="flex-container">
-        <button>test</button>
-        <button>test</button>
-        <button>test</button>
+        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=0')">Bluetooth</button>
+        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=1')">Autonomous</button>
+        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=2')">Heading</button>
       </div>
     </div>
   </div>
-</div> 
-
-<!-- Other page links -->
-<div class = "footer">
-  <div class="pageLink"><p>About</p></div>
-  <div class="pageLink"><p>Poster</p></div>
-  <div class="pageLink"><p>Contact</p></div>
-  <div class="pageLink"><p>Gallery</p></div>
 </div> 
 
 <script>
