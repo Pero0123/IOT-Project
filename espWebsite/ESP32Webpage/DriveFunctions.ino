@@ -14,15 +14,16 @@ void configureVehicleHeading() {
 }
 
 void driveTowardHeading() {
+  configureVehicleHeading();
   if (vehicleHeading < maxHeading && vehicleHeading > minHeading) {
     servoRight.write(180);
     servoLeft.write(0);
   } else if (vehicleHeading > maxHeading) {
-    servoRight.write(45);
-    servoLeft.write(45);  //facing to the right. steer left
+    servoRight.write(87);
+    servoLeft.write(87);  //facing to the right. steer left
   } else if (vehicleHeading < minHeading) {
-    servoRight.write(135);
-    servoLeft.write(135);  //facing to the left. steer right
+    servoRight.write(93);
+    servoLeft.write(93);  //facing to the left. steer right
   }
 }
 
@@ -37,12 +38,12 @@ void checkForObstacles() {
   digitalWrite(Trig1, LOW);
   duration = pulseIn(Echo1, HIGH, 3000);
   rightDistance = (duration * 0.034 / 2);
-  if (rightDistance <= collisionDistance & duration != 0) {
+  if (rightDistance <= collisionDistance && duration != 0) {
     obstacleRight = true;
-    collisionRight = "Red";
+    CollisionRight = "Red";
   } else {
     obstacleRight = false;
-    collisionRight = "Green";
+    CollisionRight = "Green";
   }
   delayMicroseconds(100);
 
@@ -54,12 +55,12 @@ void checkForObstacles() {
   digitalWrite(Trig2, LOW);
   duration = pulseIn(Echo2, HIGH, 3000);
   frontDistance = (duration * 0.034 / 2);
-  if (frontDistance <= collisionDistance & duration != 0) {
+  if (frontDistance <= collisionDistance && duration != 0) {
     obstacleFront = true;
-    collisionCenter = "Red";
+    CollisionCenter = "Red";
   } else {
     obstacleFront = false;
-    collisionCenter = "Green";
+    CollisionCenter = "Green";
   }
   delayMicroseconds(100);
 
@@ -73,11 +74,19 @@ void checkForObstacles() {
   leftDistance = (duration * 0.034 / 2);
   if (leftDistance <= collisionDistance & duration != 0) {
     obstacleLeft = true;
-    collisionLeft ="Red";
+    CollisionLeft = "Red";
   } else {
     obstacleLeft = false;
-    collisionLeft = "Green";
+    CollisionLeft = "Green";
   }
 
 
+}
+
+void stopForObstacle()
+{
+  if (obstacleFront || obstacleRight || obstacleLeft) {
+    servoRight.write(90);
+    servoLeft.write(90);
+  }
 }

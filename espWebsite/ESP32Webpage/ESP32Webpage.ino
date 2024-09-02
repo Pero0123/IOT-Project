@@ -37,17 +37,14 @@ int humidity;
 //switch pin
 #define sw 34
 
-int vehicleHeading = 140;  //stores vehicle heading from compass// initiates to 20 just to avoid anything weired happening druing callibration
+int vehicleHeading = 140;  //stores vehicle heading from compass//
 int targetHeading = 140;   //the heading the vehicle should drive towards
 int maxHeading, minHeading;
 int operationMode = 4;  //0:Manual, 1:Autonomous, 2:Drive to Heading
-bool collisionLeft = false;
-bool collisionCenter = false;
-bool collisionRight = false;
 
 unsigned long startMillis;
 unsigned long currentMillis;
-const unsigned long period = 10;  //the value is a number of milliseconds, ie 1 second
+const unsigned long period = 50;  //the value is a number of milliseconds, ie 1 second
 
 /////Ultrasonic pins and variables/////
 //right sensor
@@ -68,7 +65,7 @@ bool obstacleFront = false;
 bool obstacleLeft = false;
 bool obstacleRight = false;
 #define collisionDistance 25
-#define headingRange 12
+#define headingRange 14
 
 //website collision indicators//
 String CollisionLeft = "Green";
@@ -109,12 +106,12 @@ void handleKeyPress() {
       break;
   }
 
-  Serial.println(receivedData);
+  //Serial.println(receivedData);
   server.send(200);
 }
 void handleHeading() {
   String receivedHeading = server.arg("heading");
-  if (operationMode == 3) {
+  if (operationMode == 2) {
     targetHeading = receivedHeading.toInt();
     configureVehicleHeading();
   }
@@ -178,7 +175,7 @@ void setup(void) {
   //Compass setup Code//
   Wire.begin();
   compass.init();
-  compass.setSamplingRate(100);
+  compass.setSamplingRate(200);
   Serial.println("QMC5883L Compass Demo");
   Serial.println("Turn compass in all directions to calibrate....");
 
@@ -201,6 +198,10 @@ void setup(void) {
 
   delay(3000);  //delay to allow user to switch on vheicle safely
 
+//stop the servos
+  servoRight.write(90);
+  servoLeft.write(90);
+  
   Serial.print("Pleas connect to the webserver at ");
   Serial.print(WiFi.localIP());
   Serial.print(" to access the Dashboard");
@@ -209,40 +210,38 @@ void setup(void) {
 }
 
 void loop(void) {
+  currentMillis = millis();  //current time passed since start in milliseconds
+  if (currentMillis - startMillis >= period) {  //check if the period has elapsed
   server.handleClient();
+  startMillis = currentMillis;
   delay(1);  //allow the cpu to switch to other tasks
-
+  }
+  checkForObstacles();
+  vehicleHeading = compass.readHeading();
   //check if bluetooth switch is on. switch to bluetooth mode if it is
   if (digitalRead(sw) == HIGH) {
     operationMode = 0;
   }
 
-  if (currentMillis - startMillis >= period) {  //check if the period has elapsed
-  currentMillis = millis();  //current time passed since start in milliseconds
+  
     //check which mode the vehicle should run in
     switch (operationMode) {
       case 0:  //Bluetooth Mode
+        Serial.println("Bluetooth Mode");
+        stopForObstacle();
+        configureVehicleHeading();
         bluetoothControl();
         break;
       case 1:                      //Autonomous Mode
-        vehicleHeading = compass.readHeading();
+        Serial.println("Autonomous mode");
         Serial.println(vehicleHeading);
-        configureVehicleHeading();
         driveTowardHeading();
-        checkForObstacles();
-        Serial.print(obstacleRight);
-        Serial.print("  ");
-        Serial.print(obstacleFront);
-        Serial.print("  ");
-        Serial.print(obstacleLeft);
-        if (obstacleFront || obstacleRight || obstacleLeft) {
-          //reverse a bit and then stop
+          if (obstacleFront || obstacleRight || obstacleLeft) {
           servoRight.write(0);
           servoLeft.write(180);
           delay(1500);
           servoRight.write(90);
           servoLeft.write(90);
-
           //pick a new direction
           int newHeading;
           if (obstacleLeft == false) {
@@ -267,8 +266,8 @@ void loop(void) {
         break;
 
       case 2:  //Drive towards heading Mode
-        configureVehicleHeading();
         driveTowardHeading();
+        stopForObstacle();
         break;
 
       default:
@@ -278,12 +277,22 @@ void loop(void) {
         Serial.print(" to access the Dashboard");
         Serial.println("");
         delay(100);
+        servoRight.write(90);
+        servoLeft.write(90);
+        Serial.println("defualt mode");
         break;
     }
-     startMillis = currentMillis;
+ 
     //update temperature and humidity
     DHT.read(DHT11_PIN);
     temperature = DHT.temperature;
     humidity = DHT.humidity;
-  }
+//    Serial.println("mode =");
+//    Serial.print(operationMode);
+//    Serial.println("targetHeading =");
+//    Serial.print(targetHeading);
+//    Serial.println("vehicleHeading =");
+//    Serial.print(vehicleHeading);
+    delay(5);
+  
 }

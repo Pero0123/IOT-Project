@@ -4,185 +4,247 @@
 // If you have 2 readings then you probably have 3 literal strings etc.
 
 String homePagePart1 = F(R"=====(
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="3">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="refresh" content="3">
   <title>Autonomous Vehicle</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: rgb(4, 75, 138);
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      color: white;
-      text-align: center;
-    }
-    h1 {
-      font-size: 60px;
-    }
-    h2 {
-      color: rgb(255, 145, 0);
-      font-size: 25px;
-      margin-bottom: 30px;
-    }
-    #Dashboard {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      padding: 20px;
-    }
-    #Telemetry, #CarView, #Controls {
-      flex: 1 1 30%; /* Grow to fill space, but do not shrink below 30% of the parent container */
-      margin: 10px;
-    }
-    .controlSlider{
-      rotate: 270deg;
-      margin-top: 50px;
-      margin-bottom: 70px;
-    }
-    .button{
-        width: 20%;
-    }
-    .button img {
-    width: 100%;
-    height: auto;
-    }
-    #CarView {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .collision_row {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-    .collision_object {
-      width: 80px;
-      height: 30px;
-      background-color: red;
-      border-radius: 20px;
-      margin: 10px;
-    }
-    .footer {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-      background-color: transparent;
-    }
-    .pageLink p{
-      background-color: orange;
-      border-radius: 20px;
-      padding: 10px 20px;
-      margin: 0;
-    }
-    @media (max-width: 700px) {
-      h1 {
-        font-size: 30px;
-      }
-      h2 {
-        font-size: 15px;
-      }
-
-      #Dashboard {
-        flex-direction: column;
-      }
-    }
-  </style>
 </head>
 <body>
 
+  <style>
+*{
+    background-color: rgb(4, 75, 138);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    margin: 5px
+}
+
+p{
+  background-color: transparent;
+  font-size: 20px;
+}
+th{
+  text-align: left;
+  font-size: 20px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+h1{
+  height: 15%;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  font-size: 60px;
+}
+
+h2{
+  width: 100%;
+  color: rgb(255, 145, 0);
+  font-size: 25px;
+  padding-bottom: 60px;
+}
+
+#Dashboard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#Telemetry{
+ width: 20%;
+}
+
+#CarView{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+}
+
+#Controls{
+  width: 20%;
+}
+
+.slidecontainer {
+  width: 80%;
+  justify-content: center;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  border-radius: 20px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: orange;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: orange;
+  cursor: pointer;
+}
+
+.collision_object{
+  width: 20%;
+  padding: 2%;
+  min-height: 10px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-top: 20px;
+  margin-left: 7%;
+}
+
+.pageLink{
+  background-color: orange;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 700px) {
+  #Dashboard {   
+    flex-direction: column;
+  }
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    font-size: 15px;
+  }
+  th{
+  font-size: 10px;
+}
+p{
+  font-size: 10px;
+}
+
+}
+
+@media screen and (max-width: 1000px) {
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    font-size: 15px;
+  }
+  th{
+  font-size: 10px;
+}
+p{
+  font-size: 10px;
+}
+
+}
+
+  </style>
+
+
 <!-- Title -->
-<div class="flex-container" style="flex-direction: column;">
-  <h1>Autonomous Vehicle</h1>
-  <h2>Welcome to the Autonomous Vehicle Dashboard</h2>
+<div class = "flex-container" style="flex-direction: column;">
+<h1>Autonomous Vehicle</h1>
+<h2>Welcome to the Autonomous Vehicle Dashboard</h2>
 </div> 
 
 <!-- Main content -->
-<div id="Dashboard">
-  <div id="Telemetry">
+<div id = "Dashboard">
+  <div id="Telemetry" style="text-align: left;">
     <table>
-      <tr><th>Heading:</th><td>
+      <tr>
+        <th>Heading:</th><th>
 )=====");
 String homePagePart2 = F(R"=====(
-</td></tr>
-      <tr><th>Temperature:</th><td>
+</th>
+      </tr>
+      <tr>
+        <th>Tempreture:</th><th>
 )=====");
 String homePagePart3 = F(R"=====(
- Celsius</td></tr>
-      <tr><th>Humidity:</th><td>
+  Celsius</th>
+      </tr>
+      <tr>
+        <th>Humidity:</th><th>
 )=====");
 String homePagePart4 = F(R"=====(
-</td></tr>
-      <tr><th>Mode:</th><td>
+%</th>
+      </tr>
+      <tr>
+        <th>Mode:</th><th>
 )=====");
 String homePagePart5 = F(R"=====(
-</td></tr>
+</th>
+      </tr>
     </table>
   </div>
   <div id="CarView">
-    <div class="collision_row">
-      <div class="collision_object" style="background-color:
+    <div class="flex-container">
+    <div class="collision_object" style="background-color:
 )=====");
 String homePagePart6 = F(R"=====(
-;"></div>
-      <div class="collision_object" style="background-color:
+     ;"></div>
+    <div class="collision_object" style="background-color:
 )=====");
 String homePagePart7 = F(R"=====(
 ;"></div>
-      <div class="collision_object" style="background-color:
+    <div class="collision_object" style="background-color:
 )=====");
 String homePagePart8 = F(R"=====(
 ;"></div>
-    </div>
-    <img src="https://freesvg.org/img/car_topview.png" alt="Vehicle" style="width: 80%;">
   </div>
-  <div id="Con">
-    <h2>Set Heading</h2>
-    <input type="range" min="1" max="360" value="90" class="slider" id="headingSlider" oninput="updateHeading(this.value);">
-    <h2 id="headingValue">90</h2>
-    <h2>Manual Control</h2>
-    <input type="range" min="-255" max="255" value="0" class="controlSlider" oninput="updateSpeedLeft(this.value);">
-    <input type="range" min="-255" max="255" value="0" class="controlSlider" oninput="updateSpeedRight(this.value);">
-    <div class="flex-container">
-        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=1')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6YPeSJ6scm5usZK5s6w4Yu6wKKkpyxQ5isDpwAQLuEQ&s" alt=""></button>
-        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=2')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6YPeSJ6scm5usZK5s6w4Yu6wKKkpyxQ5isDpwAQLuEQ&s" alt=""></button>
-        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=3')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6YPeSJ6scm5usZK5s6w4Yu6wKKkpyxQ5isDpwAQLuEQ&s" alt=""></button>
-        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=4')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6YPeSJ6scm5usZK5s6w4Yu6wKKkpyxQ5isDpwAQLuEQ&s" alt=""></button>
-
+    <img src="https://freesvg.org/img/car_topview.png" alt="Vehicle">
+  </div>
+  <div class = "flex-container" id="Controls">
+    <div class="slidecontainer">
+      <h2 style="padding-bottom: 5px;">Set Heading</h2>
+      <input type="range" min="1" max="360" value="90" class="slider" id="myRange" oninput="fetch('sentHeadingToWebServer?button=T')">
+      <h2><span id="demo"></span></h2>
+      <div class="flex-container">
+        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=0')">Bluetooth</button>
+        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=1')">Autonomous</button>
+        <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=2')">Heading</button>
       </div>
+    </div>
   </div>
-</div> 
-
-<!-- Other page links -->
-<div class="footer">
-  <div class="pageLink"><p>About</p></div>
-  <div class="pageLink"><p>Poster</p></div>
-  <div class="pageLink"><p>Contact</p></div>
-  <div class="pageLink"><p>Gallery</p></div>
 </div> 
 
 <script>
-  function updateHeading(heading) {
-    document.getElementById("headingValue").textContent = heading;
+  var slider = document.getElementById("myRange");
+  var output = document.getElementById("demo");
+  output.innerHTML = slider.value;
+  
+  slider.oninput = function() {
+    var heading = slider.value;
+    output.innerHTML = this.value;
     fetch(`sentHeadingToWebServer?heading=${heading}`);
   }
-
-  function updateSpeedLeft(speedL) {
-    fetch(`sentSpeedLeftToWebServer?speedL=${speedL}`);
-  }
-
-  function updateSpeedRight(speedR) {
-    fetch(`sentSpeedRightToWebServer?speedR=${speedR}`);
-  }
-  
-</script>
+  </script>
 
 
 </body>
