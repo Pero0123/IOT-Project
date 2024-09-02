@@ -1,6 +1,6 @@
 
 void bluetoothSetup() {
-  String device_name = "PeroS21";  //bluetooth name of the esp32
+  String device_name = "AutonomousVehicle";  //bluetooth name of the esp32
   //defintions for bluetooth setup
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -54,4 +54,3 @@ void bluetoothControl() {
       break;
   }
 }
-

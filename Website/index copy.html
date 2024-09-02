@@ -195,7 +195,7 @@ p{
   <div class = "flex-container" id="Controls">
     <div class="slidecontainer">
       <h2 style="padding-bottom: 5px;">Set Heading</h2>
-      <input type="range" min="1" max="360" value="90" class="slider" id="myRange" oninput="fetch('sentKeyPressToWebServer?button=T')">
+      <input type="range" min="1" max="360" value="90" class="slider" id="myRange" oninput="fetch('sentKeyPressToWebServer?slider=T')">
       <h2><span id="demo"></span></h2>
       <div class="flex-container">
         <button class="button" onclick="fetch('/sentKeyPressToWebServer?button=0')">Bluetooth</button>
@@ -214,7 +214,7 @@ p{
   slider.oninput = function() {
     test = this.value;
     output.innerHTML = this.value;
-    fetch(`sentKeyPressToWebServer?button=${test}`);
+    fetch(`sentKeyPressToWebServer?slider=${test}`);
   }
   </script>
 
