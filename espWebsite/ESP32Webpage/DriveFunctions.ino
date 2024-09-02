@@ -30,6 +30,8 @@ void driveTowardHeading() {
 void checkForObstacles() {
   float duration;
   float distance;
+  float speedOfSound;
+  speedOfSound = 0.0331 + ( 0.61*temperature );
   //check for collision on the Right
   digitalWrite(Trig1, LOW);
   delayMicroseconds(2);
@@ -37,7 +39,7 @@ void checkForObstacles() {
   delayMicroseconds(10);
   digitalWrite(Trig1, LOW);
   duration = pulseIn(Echo1, HIGH, 3000);
-  rightDistance = (duration * 0.034 / 2);
+  rightDistance = (duration * speedOfSound / 2);
   if (rightDistance <= collisionDistance && duration != 0) {
     obstacleRight = true;
     CollisionRight = "Red";
@@ -54,7 +56,7 @@ void checkForObstacles() {
   delayMicroseconds(10);
   digitalWrite(Trig2, LOW);
   duration = pulseIn(Echo2, HIGH, 3000);
-  frontDistance = (duration * 0.034 / 2);
+  frontDistance = (duration * speedOfSound / 2);
   if (frontDistance <= collisionDistance && duration != 0) {
     obstacleFront = true;
     CollisionCenter = "Red";
@@ -71,7 +73,7 @@ void checkForObstacles() {
   delayMicroseconds(10);
   digitalWrite(Trig3, LOW);
   duration = pulseIn(Echo3, HIGH, 3000);
-  leftDistance = (duration * 0.034 / 2);
+  leftDistance = (duration * speedOfSound / 2);
   if (leftDistance <= collisionDistance & duration != 0) {
     obstacleLeft = true;
     CollisionLeft = "Red";
